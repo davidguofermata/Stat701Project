@@ -1,0 +1,33 @@
+---
+title: "Limitations/Failure of Checks with the \"project\" package"
+author: "David Guo"
+date: "4/27/2017"
+fontsize: 11pt
+output: pdf_document
+---
+
+#getRecipes()
+
+$\tt{expect\_identical(getRecipes(ingredients="onion"),getRecipes(ingredients="onions"))}$
+$\texttt{Error in getRecipes(ingredients = "onion") : No recipes found!}$
+
+The actual search engine appears to accept some singular terms as plural (like onion as onions), but the API does not. Due to the many variation in pluralizing food, the function treats keywords as is. If a user enters "onion" instead of "onions" as an ingredient, the function in its current state treats them as two different ingredients. I think constructing a check for different plural words would require a lexicon-related package that is beyond the scope of this project (we need to look into exceptions of food names, those that end in s that act both as plural and singular form).
+
+#regsim()
+
+$\texttt{expect\_error(regsim(err.dist="laplace", rate=c(3,5)), "rate must be single number")}$
+
+$\texttt{Error: error\$message does not match "rate must be single number"}$
+
+$\texttt{Actual value: "(list) object cannot be coerced to type 'double'"}$
+
+I am not sure why this is the case. It may be that the list takes precedence to the check for list length. It is OK since they both produce an error, but a future build would try to output the more useful error message.
+
+Currently, the function only treats the predictor normally distributed random data.
+
+#Package Checks
+
+I could not get the test_check to work in the package, but in the console, the tests passed. I tried using $\texttt{Sys.setenv("R\_TESTS" = "")}$ (\url{https://github.com/hadley/testthat/issues/86}), but it did not work for me.
+
+$\texttt{\\examples lines wider than 100 characters}$
+For getRecipes, the examples are too wide. I tried manually editing the .Rd file by inserting a linebreak, but it treated it as part of the example so the error was worse. 

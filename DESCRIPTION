@@ -1,0 +1,27 @@
+Package: project
+Type: Package
+Title: Recipe Search & Simulation 
+Version: 0.1.0
+Author: David Guo 
+Maintainer: David Guo <davidguo@umich.edu>
+Contributer: David Guo
+Description: The package contains three functions. 
+    Recipe Search contains a function that uses the Recipe Puppy API 
+    to return 100 recipes given a list of ingredients. Simulation 
+    consists of two functions that look at assumption violation with
+    the errors for linear regression and plots various combinations
+    of parameters and estimates.
+Imports: 
+  curl,
+  ggplot2,
+  jsonlite,
+  stats,
+  stringr,
+  utils,
+Suggests:
+  testthat
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: testthat
